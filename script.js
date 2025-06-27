@@ -4,20 +4,16 @@ const url = "https://jsonplaceholder.typicode.com/posts/1";
 const btn = document.getElementById("btn");
 
 async function fetchDataAndProcess(callback) {
-      // Simulate a delay using a Promise (like fetching data from server)
-      const result = await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("Data fetched successfully!");
-        }, 2000); // 2 second delay
-      });
-
-      // Call the callback with the result
-      callback(result);
-    }
+  const res = await fetch(url);
+  const data = await res.json();
+  callback(data.title);
+}
 
 function displayMessage(message) {
-      document.getElementById("output").innerText = message;
-    }
+    document.getElementById("output").innerText = message;
+}
 
-btn.onclick = () => {};
-fetchDataAndProcess(displayMessage);
+btn.onclick = () => {
+	fetchDataAndProcess(displayMessage);
+};
+
